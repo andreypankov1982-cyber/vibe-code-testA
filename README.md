@@ -1,78 +1,117 @@
 # Terminal Chat Bot with Function Calling
 
-Решение тестового задания по варианту А.
+Test assignment solution for **Variant A**.
 
-## Что делает проект
+## Overview
 
-Это консольный чат-бот на Python, который:
+This project is a terminal-based chat bot built with Python and the OpenAI API.
 
-- принимает сообщения пользователя в терминале
-- отправляет их в OpenAI
-- умеет вызывать простую функцию `get_current_time`
-- использует функцию, когда пользователь спрашивает текущее время
+It can:
 
-## Стек
+- read user messages in a loop
+- send them to OpenAI
+- use a simple tool named `get_current_time`
+- call that tool when the user asks for the current time
 
-- Python
-- OpenAI Python SDK
-- pytest
+The implementation follows the assignment requirement to support basic function calling in a console chat flow.
 
-## Установка
+## Features
 
-1. Установить зависимости:
+- terminal chat loop
+- OpenAI Responses API integration
+- function calling with `get_current_time`
+- second request after tool execution
+- `.env` support via `python-dotenv`
+- basic automated test with `pytest`
+
+## Project Structure
+
+- `main.py` — main chat bot application
+- `tests/test_main.py` — automated test for function call handling
+- `requirements.txt` — project dependencies
+- `.env.example` — example environment configuration
+- `.gitignore` — ignored local files
+
+## Setup
+
+1. Clone the repository:
 
 ```bash
-pip install openai pytest
+git clone https://github.com/andreypankov1982-cyber/vibe-code-testA.git
+cd vibe-code-testA
 ```
 
-2. Установить API-ключ в PowerShell:
+2. Create and activate a virtual environment:
 
 ```powershell
-$env:OPENAI_API_KEY="your_api_key"
+python -m venv .venv
+.venv\Scripts\activate
 ```
 
-## Запуск
+3. Install dependencies:
 
-```bash
+```powershell
+pip install -r requirements.txt
+```
+
+4. Create a `.env` file in the project root:
+
+```env
+OPENAI_API_KEY=your_real_openai_api_key_here
+```
+
+You can copy `.env.example` and rename it to `.env`.
+
+## Run
+
+```powershell
 python main.py
 ```
 
-## Тесты
+## Run Tests
 
-Запуск тестов:
-
-```bash
+```powershell
 pytest
 ```
 
-В проекте добавлен 1 автотест, который проверяет обработку function calling.
-
-## Пример диалога
+## Example Dialogue
 
 ```text
 Чат запущен. Напиши сообщение.
 Для выхода введи: exit
 
 Ты: Сколько будет 2+2?
-Бот: 2+2 = 4.
+Бот: 2 + 2 = 4.
 
 Ты: Какое сейчас время?
 [tool] get_current_time -> 2026-03-14 17:28:03
-Бот: Сейчас время 17:28.
+Бот: Сейчас 17:28. Чем могу помочь?
 
 Ты: exit
 Выход из чата.
 ```
 
-## Файлы проекта
+## How Function Calling Works
 
-- `main.py` — основной код чат-бота
-- `README.md` — описание проекта
-- `tests/test_main.py` — автотест для проверки обработки function calling
+1. The user message is sent to OpenAI.
+2. If the model decides to call `get_current_time`, the script detects the function call.
+3. The tool is executed locally in Python.
+4. The tool result is sent back to OpenAI.
+5. The final assistant response is printed in the terminal.
 
-## Что реализовано по ТЗ
+## Assignment Checklist
 
-1. Скрипт в цикле принимает сообщения от пользователя и отправляет их в OpenAI
-2. Добавлена функция `get_current_time`
-3. В системном промпте указано, что бот может использовать функцию для вопроса о времени
-4. Бот обрабатывает вызов функции и возвращает результат
+Implemented requirements from Variant A:
+
+1. A script that continuously reads user input and sends it to OpenAI
+2. A function `get_current_time` that returns the current time
+3. A prompt that tells the model to use the tool when the user asks for time
+4. Parsing the model response and executing the function when needed
+
+## AI Usage
+
+**AI-assisted contribution: approximately 65%.**
+
+AI was used to help with project scaffolding, drafting parts of the function-calling flow, refining the test, and preparing documentation.
+
+Final integration, environment setup, debugging, validation, and manual refinements were completed by the author.
