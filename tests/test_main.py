@@ -14,8 +14,27 @@ class FakeFunctionCall:
     call_id = "call_123"
 
 
+class FakeUnknownFunctionCall:
+    type = "function_call"
+    name = "unknown_function"
+    arguments = json.dumps({})
+    call_id = "call_999"
+
+
+class FakeMessage:
+    type = "message"
+
+
 class FakeResponse:
     output = [FakeFunctionCall()]
+
+
+class FakeUnknownResponse:
+    output = [FakeUnknownFunctionCall()]
+
+
+class FakeNoFunctionResponse:
+    output = [FakeMessage()]
 
 
 def test_build_function_outputs_returns_function_result(monkeypatch):
@@ -30,3 +49,21 @@ def test_build_function_outputs_returns_function_result(monkeypatch):
             "output": "2026-03-14 17:28:03",
         }
     ]
+
+
+def test_build_function_outputs_returns_unknown_function_message():
+    result = main.build_function_outputs(FakeUnknownResponse())
+
+    assert result == [
+        {
+            "type": "function_call_output",
+            "call_id": "call_999",
+            "output": "Unknown function: unknown_function",
+        }
+    ]
+
+
+def test_build_function_outputs_returns_empty_list_when_no_function_call():
+    result = main.build_function_outputs(FakeNoFunctionResponse())
+
+    assert result == []

@@ -22,12 +22,12 @@ The implementation follows the assignment requirement to support basic function 
 - function calling with `get_current_time`
 - second request after tool execution
 - `.env` support via `python-dotenv`
-- basic automated test with `pytest`
+- automated tests with `pytest` for tool-call handling scenarios
 
 ## Project Structure
 
 - `main.py` — main chat bot application
-- `tests/test_main.py` — automated test for function call handling
+- `tests/test_main.py` — automated tests for tool-call handling scenarios
 - `requirements.txt` — project dependencies
 - `.env.example` — example environment configuration
 - `.gitignore` — ignored local files
@@ -73,6 +73,11 @@ python main.py
 ```powershell
 pytest
 ```
+
+## Error Handling
+
+- the application shows a clear error message if `OPENAI_API_KEY` is missing
+- the chat can be stopped with `exit`, `quit`, `q`, `Ctrl+C`, or `Ctrl+D`
 
 ## Example Dialogue
 
