@@ -8,7 +8,7 @@ from openai import OpenAI
 
 load_dotenv()
 
-MODEL = "gpt-4.1-mini"
+MODEL = "gpt-4o-mini"
 EXIT_COMMANDS = {"exit", "quit", "q"}
 
 SYSTEM_PROMPT = """

@@ -34,6 +34,7 @@ The implementation follows the assignment requirement to support basic function 
 
 ## Setup
 
+**Requirements:** Python 3.9+
 1. Clone the repository:
 
 ```bash
